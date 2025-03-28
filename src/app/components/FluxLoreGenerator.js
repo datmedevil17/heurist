@@ -24,8 +24,7 @@ export default function FluxLoraGenerator() {
         height: 1024,
         steps: 20,
         noise_seed: 123456,
-        consumer_id: "your_consumer_id", // Replace with actual ID
-        api_key: "your_api_key", // Replace with actual API key
+        api_key: process.env.NEXT_PUBLIC_HEURIST_API_KEY, // Replace with actual API key
       }),
     });
 

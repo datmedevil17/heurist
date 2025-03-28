@@ -23,7 +23,7 @@ export async function POST(req) {
       }
       const response = await axios.post("http://sequencer.heurist.xyz/submit_job",data,{
         headers:{
-            "Authorization":`Bearer ${process.env.API_TOKEN}`
+            "Authorization":`Bearer ${process.env.NEXT_PUBLIC_HEURIST_API_KEY}`
         }
       })
       console.log(response.data);
