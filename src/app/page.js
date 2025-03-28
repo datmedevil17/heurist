@@ -51,13 +51,13 @@ export default function Home() {
 
         <motion.button
           onClick={generateImage}
-          className={`w-full mt-4 px-6 py-3 text-lg font-semibold rounded-lg transition-all duration-300 ${
+          className={`w-full mt-4 cursor-pointer px-6 py-3 text-lg font-semibold rounded-lg transition-all duration-300 ${
             loading
               ? "bg-gray-600 cursor-not-allowed"
               : "bg-blue-500 hover:bg-blue-600 shadow-lg"
           }`}
           disabled={loading}
-          whileHover={{ scale: 1.05 }}
+          
           whileTap={{ scale: 0.95 }}
         >
           {loading ? "Generating..." : "Generate Image"}

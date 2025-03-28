@@ -1,6 +1,7 @@
 "use client"; // Needed for Next.js App Router
-
 import { useState } from "react";
+import { Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function FluxLoraGenerator() {
   const [prompt, setPrompt] = useState("");
@@ -39,41 +40,67 @@ export default function FluxLoraGenerator() {
   }
 
   return (
-    <div className="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-4">FluxLora Image Generator</h1>
-
-      <input
-        type="text"
-        placeholder="Enter Prompt"
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-        className="border p-2 mb-3 w-80 rounded"
-      />
-
-      <input
-        type="text"
-        placeholder="LoRA Model Name"
-        value={loraName}
-        onChange={(e) => setLoraName(e.target.value)}
-        className="border p-2 mb-3 w-80 rounded"
-      />
-
-      <button
-        onClick={generateImage}
-        disabled={loading}
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 p-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl rounded-2xl p-8 w-full max-w-md text-white"
       >
-        {loading ? "Generating..." : "Generate Image"}
-      </button>
+        <h1 className="text-3xl font-bold text-center mb-6 text-blue-400">
+          FluxLora Image Generator
+        </h1>
 
-      {error && <p className="text-red-500 mt-4">{error}</p>}
+        <div className="space-y-4">
+          <input
+            type="text"
+            placeholder="Enter Prompt"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            className="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+          />
 
-      {imageURL && (
-        <div className="mt-6">
-          <h2 className="text-xl font-semibold mb-2">Generated Image</h2>
-          <img src={imageURL} alt="Generated" className="w-80 rounded-lg shadow-md" />
+          <input
+            type="text"
+            placeholder="LoRA Model Name"
+            value={loraName}
+            onChange={(e) => setLoraName(e.target.value)}
+            className="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+          />
+
+          <button
+            onClick={generateImage}
+            disabled={loading}
+            className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white p-3 rounded-lg font-semibold transition-all hover:bg-blue-700 disabled:bg-gray-600"
+          >
+            {loading ? <Loader2 className="animate-spin" /> : "Generate Image"}
+          </button>
         </div>
-      )}
+
+        {error && (
+          <p className="mt-4 text-center text-red-400 bg-gray-800 p-3 rounded-lg">
+            Error: {error}
+          </p>
+        )}
+
+        {imageURL && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mt-6 bg-gray-800 p-4 rounded-lg"
+          >
+            <h2 className="text-xl font-semibold text-blue-400 mb-3 text-center">
+              Generated Image
+            </h2>
+            <img
+              src={imageURL}
+              alt="Generated"
+              className="w-full rounded-lg shadow-lg border border-white/20"
+            />
+          </motion.div>
+        )}
+      </motion.div>
     </div>
   );
 }
