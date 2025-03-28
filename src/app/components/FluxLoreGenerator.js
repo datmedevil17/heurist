@@ -47,7 +47,7 @@ export default function FluxLoraGenerator() {
         transition={{ duration: 0.5 }}
         className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl rounded-2xl p-8 w-full max-w-md text-white"
       >
-        <h1 className="text-3xl font-bold text-center mb-6 text-blue-400">
+        <h1 className="text-3xl font-bold text-center mb-6 text-white">
           FluxLora Image Generator
         </h1>
 

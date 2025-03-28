@@ -27,7 +27,7 @@ const Page = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 p-6">
       <div className="bg-gray-950 text-white shadow-lg rounded-xl p-6 w-full max-w-lg">
-        <h1 className="text-3xl font-bold text-center mb-6 text-blue-400">
+        <h1 className="text-3xl font-bold text-center mb-6 text-white">
           Crypto Info Finder
         </h1>
 
