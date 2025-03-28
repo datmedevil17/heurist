@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
+import { Loader2 } from "lucide-react";
 
 const Page = () => {
   const [data, setData] = useState(null);
@@ -24,36 +25,47 @@ const Page = () => {
   };
 
   return (
-    <div className="p-4">
-      <form onSubmit={handleSubmit} className="mb-4">
-        <div className="flex flex-col gap-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 p-6">
+      <div className="bg-gray-950 text-white shadow-lg rounded-xl p-6 w-full max-w-lg">
+        <h1 className="text-3xl font-bold text-center mb-6 text-blue-400">
+          Crypto Info Finder
+        </h1>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Enter your crypto query..."
-            className="p-2 border rounded-md w-full"
+            placeholder="Enter crypto name or symbol..."
+            className="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
-          <button 
+          <button
             type="submit"
             disabled={loading}
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 disabled:bg-gray-400"
+            className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white p-3 rounded-lg font-semibold transition-all hover:bg-blue-700 disabled:bg-gray-600"
           >
-            {loading ? "Loading..." : "Get Information"}
+            {loading ? <Loader2 className="animate-spin" /> : "Get Information"}
           </button>
-        </div>
-      </form>
+        </form>
 
-      {error && <p className="text-red-500">Error: {error}</p>}
-      {data && (
-        <div>
-          <h1 className="text-2xl font-bold mb-4">Crypto Information</h1>
-          <pre className="bg-gray-100 p-4 rounded-md overflow-auto">
-            {JSON.stringify(data, null, 2)}
-          </pre>
-        </div>
-      )}
+        {error && (
+          <p className="mt-4 text-center text-red-400 bg-gray-800 p-3 rounded-lg">
+            Error: {error}
+          </p>
+        )}
+
+        {data && (
+          <div className="mt-6 bg-gray-800 p-4 rounded-lg">
+            <h2 className="text-xl font-semibold text-blue-400 mb-3">
+              Crypto Information
+            </h2>
+            <pre className="text-sm bg-gray-900 p-3 rounded-lg overflow-auto max-h-60">
+              {JSON.stringify(data, null, 2)}
+            </pre>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

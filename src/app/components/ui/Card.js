@@ -1,13 +1,23 @@
 import React from "react";
 
 export const Card = ({ children, className }) => (
-  <div className={`bg-white shadow-md rounded-lg p-4 ${className}`}>{children}</div>
+  <div
+    className={`backdrop-blur-md bg-white/10 border border-white/20 shadow-lg hover:shadow-xl transition-all rounded-xl p-6 ${className}`}
+  >
+    {children}
+  </div>
 );
 
 export const CardHeader = ({ children }) => (
-  <div className="border-b pb-2 mb-2 text-lg font-semibold">{children}</div>
+  <div className="border-b border-white/20 pb-3 mb-3 text-xl font-semibold text-blue-400">
+    {children}
+  </div>
 );
 
-export const CardTitle = ({ children }) => <h2 className="text-gray-900">{children}</h2>;
+export const CardTitle = ({ children }) => (
+  <h2 className="text-white text-lg font-bold">{children}</h2>
+);
 
-export const CardContent = ({ children }) => <div className="text-gray-700">{children}</div>;
+export const CardContent = ({ children }) => (
+  <div className="text-gray-300 text-sm">{children}</div>
+);

@@ -11,8 +11,8 @@ export default function Home() {
   const generateImage = async () => {
     if (!prompt) return alert("Please enter a prompt!");
 
-    setLoading(true); // Start loading
-    setImageUrl(""); // Clear previous image
+    setLoading(true);
+    setImageUrl("");
 
     const response = await fetch("/api/generateImage", {
       method: "POST",
@@ -21,52 +21,67 @@ export default function Home() {
     });
 
     const data = await response.json();
-    setLoading(false); // Stop loading
+    setLoading(false);
 
     if (data.imageUrl) setImageUrl(data.imageUrl);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-900 text-white">
-      <h1 className="text-3xl font-bold mb-4">Welcome to My dApp</h1>
-      <ConnectButton />
-
-      <input
-        type="text"
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Enter prompt for AI image..."
-        className="w-full max-w-md p-3 my-4 text-black rounded-lg"
-      />
-
-      <button
-        onClick={generateImage}
-        className={`px-6 py-2 text-lg font-semibold rounded-lg ${
-          loading ? "bg-gray-600 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-700"
-        }`}
-        disabled={loading}
+    <div className="flex flex-col items-center justify-center min-h-screen px-6 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white">
+      <motion.div
+        className="backdrop-blur-xl bg-white/10 border border-white/20 shadow-lg rounded-2xl p-8 max-w-md w-full text-center"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
       >
-        {loading ? "Generating..." : "Generate Image"}
-      </button>
+        <h1 className="text-4xl font-extrabold text-white mb-4 drop-shadow-lg">
+          AI Image Generator
+        </h1>
 
-      {loading && (
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-          className="w-12 h-12 mt-4 border-4 border-blue-500 border-t-transparent rounded-full"
-        />
-      )}
+        <ConnectButton />
 
-      {imageUrl && (
-        <motion.img
-          src={imageUrl}
-          alt="Generated AI Image"
-          className="mt-6 w-96 rounded-lg shadow-lg"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
+        <motion.input
+          type="text"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          placeholder="Describe an image..."
+          className="w-full p-3 mt-6 rounded-lg text-black bg-white focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+          whileFocus={{ scale: 1.05 }}
         />
-      )}
+
+        <motion.button
+          onClick={generateImage}
+          className={`w-full mt-4 px-6 py-3 text-lg font-semibold rounded-lg transition-all duration-300 ${
+            loading
+              ? "bg-gray-600 cursor-not-allowed"
+              : "bg-blue-500 hover:bg-blue-600 shadow-lg"
+          }`}
+          disabled={loading}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          {loading ? "Generating..." : "Generate Image"}
+        </motion.button>
+
+        {loading && (
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+            className="w-12 h-12 mt-4 border-4 border-blue-500 border-t-transparent rounded-full"
+          />
+        )}
+
+        {imageUrl && (
+          <motion.img
+            src={imageUrl}
+            alt="Generated AI Image"
+            className="mt-6 w-full rounded-lg shadow-xl"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          />
+        )}
+      </motion.div>
     </div>
   );
 }
