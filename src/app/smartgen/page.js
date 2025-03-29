@@ -16,13 +16,14 @@ export default function SmartGen() {
     setLoading(true);
     try {
       const response = await axios.post('/api/generateImageSmartGen', {
-        description,
+        prompt: description,
+        lora_name: 'gecko',
         stylization_level: stylization,
         detail_level: detail,
         color_level: color,
         lighting_level: lighting,
       });
-      setImageUrl(response.data.imageUrl);
+      setImageUrl(response.data.result);
     } catch (error) {
       console.error('Error generating image:', error);
     } finally {

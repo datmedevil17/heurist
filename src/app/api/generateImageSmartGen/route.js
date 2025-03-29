@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import Heurist from "heurist";
+import Heurist, { FluxLoraTask } from "heurist";
 
 const heurist = new Heurist({
   apiKey: process.env.NEXT_PUBLIC_HEURIST_API_KEY,
@@ -19,7 +19,7 @@ export async function POST(req) {
       api_key,
     } = body;
 
-    const fluxLoraTask = new heurist.FluxLoraTask({
+    const fluxLoraTask = new FluxLoraTask({
       workflow_id: "3",
       prompt,
       lora_name,
