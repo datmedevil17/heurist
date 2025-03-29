@@ -1,5 +1,5 @@
 import React from 'react'
-import FluxLoraGenerator from '../components/FluxLoreGenerator'
+import FluxLoraGenerator from '../../components/FluxLoreGenerator'
 
 const page = () => {
   return (

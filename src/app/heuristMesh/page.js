@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardTitle, CardHeader } from "../components/ui/Card";
+import { Card,CardContent,CardTitle,CardHeader } from "../../components/ui/Card";
 import { Loader } from "lucide-react";
 
 const Page = () => {
