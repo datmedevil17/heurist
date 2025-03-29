@@ -23,7 +23,7 @@ export default function SmartGen() {
         color_level: color,
         lighting_level: lighting,
       });
-      setImageUrl(response.data.result);
+      setImageUrl(response.data.result.url);
     } catch (error) {
       console.error('Error generating image:', error);
     } finally {
